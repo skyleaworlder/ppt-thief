@@ -48,7 +48,7 @@
 * 遍历层数
 * 输出路径
 * 打包选项
-* 压缩选项（还没做完）
+* 压缩选项
 
 当 `[PPT-THEIF]: you're waiting for your rabbits under the TREE` 之后，一旦老师把 U 盘插在电脑上，拷贝就开始了。
 
