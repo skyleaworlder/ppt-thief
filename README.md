@@ -4,7 +4,7 @@
 
 ## 这是个啥
 
-`PPT-thief`，一个获取他人 U 盘中 `PPT` 的小道具。
+`PPT-thief`，一个等待着 U 盘插入，并悄悄拷贝盘中 `PPT` 的小陷阱。
 
 ## 为什么做这个
 
@@ -30,6 +30,8 @@
 
 ### 基本使用
 
+在老师还没进教师之前打开电脑，在电脑上运行 `ppt_thief.py`：
+
 > virtualenv .venv
 >
 > .venv/Script/activate
@@ -47,6 +49,8 @@
 * 输出路径
 * 打包选项
 * 压缩选项（还没做完）
+
+当 `[PPT-THEIF]: you're waiting for your rabbits under the TREE` 之后，一旦老师把 U 盘插在电脑上，拷贝就开始了。
 
 ### 大致思路
 
