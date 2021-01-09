@@ -1,10 +1,56 @@
 # PPT-thief
 
-## 理清思路
+![效果图](img/result.png)
 
-我的目标是要做一个拷贝老师 U 盘里面 ppt 的工具。
+## 这是个啥
 
-### 整体
+`PPT-thief`，一个获取他人 U 盘中 `PPT` 的小道具。
+
+## 为什么做这个
+
+2020 春季学期，我上了一门奇怪的课，这课的老师不在群里面发课件。
+但其实还好，由于是网课，所以每张停留超过 5 秒钟的画面我都截了下来，并且发给了一起上课的同学，我可真是个带善人。
+
+2020-2021 秋季学期，这位老师还给我们上课，但是这次是真的没办法了。
+每次课间，同学上去恳求老师在群里发下课件，老师当时是满口答应，回去就忘得一干二净（其实也不是忘了，就是发到网络上不安全，有被传播的风险
+
+但是这门课的课件对于作业和考试多少还是有些帮助，因此我就有了这个想法：
+
+> 检测 U 盘是否插入，此后拷贝对应路径下的所有课件到外部，之后我再打包、压缩、加密……
+
+只可惜有这个想法已经是最后一堂课之后了，由此便失去了实战的机会……
+
+## 一些说明
+
+### 环境
+
+* `Win10`（学校的电脑大多数是 `Win10 / Win7` 的）
+* `Python 3.6`（因为学校老电脑大多数是 3.6 的）
+* `VSCode`
+
+### 基本使用
+
+> virtualenv .venv
+>
+> .venv/Script/activate
+>
+> pip install -r requirements.txt
+>
+> python ppt_thief.py
+
+脚本中提供了一系列的参数可供自定义，如：
+
+* U 盘盘符
+* 查找间隔
+* 特定路径
+* 遍历层数
+* 输出路径
+* 打包选项
+* 压缩选项（还没做完）
+
+### 大致思路
+
+这玩意儿其实很简单……
 
 ```pseudo
 while True {
@@ -19,50 +65,16 @@ while True {
 
 * 大循环的 `sleep` 时间应该可以调整；
 * 可否通过配置文件来配置程序？
-
-### 嗅探函数
-
-```pseudo
-def smell_u_disk():
-    if len(psutil.disk_partitions()) != length:
-        disk = psutil.disk_partitions()
-```
-
 * `smell` 可否自己指定一个盘符？因为可能 `U` 盘自己会使用特定的盘符；
 * 这个函数提供的输入参数有哪些？
 * 把读取到的 `disk` 放到全局里面好不好？
-
-### 获取 ppt 函数
-
-```pseudo
-def fetch_ppt():
-    find_ppt()
-
-    for path in ppt_path:
-        mv U:\\...\\*.ppt to xxx
-        (tar? compress? encrypt? key?)
-```
-
-首先该函数需要一个能够找到所有 ppt 位置的函数。
-
 * 该函数将文件移动到什么地方？不管怎样，默认值需要提供。
 * 是否打包、压缩、加密？如果要加密的话，密钥怎么处理？
 
-### 寻找 ppt 函数
+最后有的实现了，有的没实现，但是加还是好加的。
 
-```pseudo
-def find_ppt(root):
-    global ppt_path
-    local_path = root
-    child_path = getChild(root)
+## 最后
 
-    for path in child_path:
-        if is_file(path) and match_ppt(path):
-            ppt_path.append(path)
-        elif is_dir(path):
-            find_ppt(path)
-        else:
-            pass
-```
+代码写的很乱，注释不多，使用起来可能会有各种各样问题，只是用自己的 U 盘测了一下，感觉凑合能用就直接 `public` 了。
 
-完完全全一个 `DFS`。
+轻喷。
