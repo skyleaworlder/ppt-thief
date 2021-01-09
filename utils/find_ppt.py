@@ -31,7 +31,7 @@ def listdir_s(local_root):
     all_sub_files = []
     try:
         all_sub_files = os.listdir(local_root)
-        print("listdir_s:", all_sub_files)
+        #print("listdir_s:", all_sub_files)
     except Exception as e:
         all_sub_files = []
         traceback.print_exc(e)
@@ -47,7 +47,7 @@ def add_ppt_from_lst(file_paths):
     for file in file_paths:
         if re.match(match_pattern, file):
             ppt_path.append(file)
-        print(file)
+        #print(file)
 
 def layer_trans(local_root, total_layer):
     '''
@@ -74,7 +74,7 @@ def layer_trans(local_root, total_layer):
             tmp_dir_paths, tmp_file_paths = sepa_dir_file(all_sub_file_paths)
             dir_paths_buf1 += tmp_dir_paths
             file_paths += tmp_file_paths
-            print(file_paths, dir_paths_buf1, dir_paths_buf0)
+            #print(file_paths, dir_paths_buf1, dir_paths_buf0)
 
         # 先将下一层的检测并添加
         add_ppt_from_lst(file_paths)

@@ -3,7 +3,7 @@ import time
 import traceback
 import sys
 
-from GLOBAL import pc_disk_partitions
+from .GLOBAL import pc_disk_partitions
 
 def smell(target_drive="E:\\", enable_target=False):
     global pc_disk_partitions
