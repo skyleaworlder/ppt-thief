@@ -3,6 +3,8 @@ import time
 from pathlib import Path
 import re
 
+from utils import smell_u_disk, find_ppt, stole_ppt, GLOBAL
+
 logo = '''
 ================================================================
     ++====++ ++====++ ========                 by skyleaworlder
@@ -21,7 +23,7 @@ print(logo)
 print("U 盘盘符 (e.g. 若为 E 盘，则输入 \"E\"，默认为 \"E\")")
 while True:
     input_res = input("请输入老师 U 盘的盘符: ")
-    u_charactor = input_res if len(input_res) != 0 else "E"
+    u_charactor = input_res+":\\" if len(input_res) != 0 else "E:\\"
 
     print("盘符为:", u_charactor)
     input_res = input("请输入 Y 确认: ")
@@ -53,8 +55,20 @@ while True:
         break
 print("\n")
 
-root = Path(u_charactor+":\\"+detail_root)
+root = Path(u_charactor+detail_root)
 print("你想要查找的路径为:", root, "\n")
+
+
+print("本程序使用层序遍历方法，因此需要给出遍历的层数，层数默认为 5。")
+print("ppt 藏匿过深可能会导致程序效果欠佳。")
+while True:
+    input_res = input("请输入层序遍历层数: ")
+    total_layer = int(input_res) if len(input_res) != 0 else 5
+    print("输入的层数为:", total_layer)
+    input_res = input("请输入 Y 确认: ")
+    if input_res == "Y":
+        break
+print('\n')
 
 
 print("ppt 的输出路径，默认为 \"./out/output\"")
@@ -67,6 +81,7 @@ while True:
     print("输出路径为:", output_path)
     input_res = input("请输入 Y 确认: ")
     if input_res == "Y":
+        GLOBAL.target_path = output_path
         break
 print("\n")
 
@@ -78,21 +93,27 @@ while True:
         print("你还可以输出到其他文件夹下，e.g. \"D:\\ppt_output\\ppt_thief.tar\"")
         input_res = input("打包文件名路径为: ")
         tar_path = input_res if len(input_res) != 0 else "./out/ppt_thief.tar"
+        GLOBAL.tar_path = tar_path
         break
     elif is_tar == "N":
         tar_path = ""
+        GLOBAL.tar_path = tar_path
         break
 
 
-'''
-TODO: 主体工作
-'''
-'''
-while(True):
-    if root.is_dir():
-        layer_trans(root)
+
+
+while True:
+    enable_target = (len(detail_root) != 0)
+    detail = detail_root if enable_target else None
+    smell_res = smell_u_disk.smell(u_charactor, enable_target, detail)
+
+    if smell_res["target_exist"]:
+        find_ppt.layer_trans(root, total_layer)
+        stole_ppt.copy_ppt()
+        if is_tar:
+            stole_ppt.tar_ppt()
         break
     else:
         time.sleep(int(float(check_time)))
-        print("hahah")
-'''
+        print("[PPT-THIEF]: you're waiting your rabbits under the TREE.")

@@ -11,10 +11,10 @@ match_pattern = '.+\.(ppt|pptx)$'
 skip_pattern = '($RECYCLE)'
 
 # 存储路径
-target_path = "D:\\ppt_thief\\"
+target_path = "./out/output"
 
 # 打包路径
-tar_path = "D:\\ppt_thief.tar"
+tar_path = "./out/ppt_thief.tar"
 
 # 压缩路径
-zip_path = "D:\\ppt_thief.zip"
+zip_path = "./out/ppt_thief.zip"
