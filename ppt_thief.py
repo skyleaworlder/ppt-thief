@@ -140,4 +140,6 @@ while True:
         break
     else:
         time.sleep(int(float(check_time)))
-        print("[PPT-THIEF]: you're waiting your rabbits under the TREE.")
+        print("[PPT-THIEF]: you're waiting for your rabbits under the TREE.")
+
+print("[PPT-THIEF]: we finish it!")
